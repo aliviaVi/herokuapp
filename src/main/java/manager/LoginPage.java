@@ -15,6 +15,7 @@ public class LoginPage {
     private String incorrectPass = "SuperSecretPassword!123";
     private By passwordById = By.id("password");
     private By loginButtonByXpath = By.xpath("//form[@id='login']/button/i");
+    private By loginPageByXpath = By.xpath("//*[@id='content']/div/h2");
 
 
     public LoginPage(WebDriver webDriver) {

@@ -10,6 +10,7 @@ public class HomePage {
     protected WebDriver webDriver;
 
     private By authByXpath = By.xpath("//a[contains(text(),'Form Authentication')]");
+    private By inputsFieldByXpath = By.xpath("//a[contains(text(),'Inputs')]");
 
 
 
@@ -25,6 +26,12 @@ public class HomePage {
                 .until(ExpectedConditions.presenceOfElementLocated(authByXpath));
         element.click();
         return new LoginPage (webDriver);
+    }
+    public InputsPage openInputsPage(){
+        WebElement element = (new WebDriverWait(webDriver,10))
+                .until(ExpectedConditions.presenceOfElementLocated(inputsFieldByXpath));
+        element.click();
+        return new InputsPage(webDriver);
     }
     public String getMessage(){
         String text = webDriver.findElement(By.xpath("//*[@id='content']/div/h2")).getText();
