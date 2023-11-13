@@ -20,36 +20,28 @@ public class LoginPage {
 
     public LoginPage(WebDriver webDriver) {
         this.webDriver = webDriver;
-        if (!webDriver.findElement(By.xpath("//*[@id='content']/div/h2")).getText().equals("Login Page")) {
+        if (!webDriver.findElement(loginPageByXpath).getText().equals("Login Page")) {
             throw new IllegalStateException("This is not a Login page," + "current page is>" + webDriver.getCurrentUrl());
         }
     }
 
     public void typeCorrectUserName() {
         WebElement element = webDriver.findElement(userNameById);
-        element.click();
-        element.clear();
-        element.sendKeys(name);
+              element.sendKeys(name);
     }
 
     public void typeCorrectPassword() {
         WebElement element = webDriver.findElement(passwordById);
-        element.click();
-        element.clear();
         element.sendKeys(password);
     }
 
     public void typeIncorrectPassword() {
         WebElement element = webDriver.findElement(passwordById);
-        element.click();
-        element.clear();
         element.sendKeys(incorrectPass);
     }
 
     public void typeIncorrectUserName() {
         WebElement element = webDriver.findElement(userNameById);
-        element.click();
-        element.clear();
         element.sendKeys(incorrectUserName);
     }
 

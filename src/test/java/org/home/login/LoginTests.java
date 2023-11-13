@@ -6,7 +6,7 @@ import manager.SecureAreaPage;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-public class PageObjectLoginTests extends TestBase {
+public class LoginTests extends TestBase {
 
 
     public LoginPage mainStepsToLogin(){
