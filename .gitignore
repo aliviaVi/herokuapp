@@ -7,3 +7,4 @@ target/
 *.log
 /build
 .DS_Store
+.gradle/
