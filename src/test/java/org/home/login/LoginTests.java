@@ -5,6 +5,7 @@ import manager.LoginPage;
 import manager.SecureAreaPage;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+import utils.PageInputs;
 
 public class LoginTests extends TestBase {
 
@@ -19,8 +20,8 @@ public class LoginTests extends TestBase {
     @Test
     public void loginSuccessTest(){
         LoginPage loginPage = mainStepsToLogin();
-      loginPage.typeCorrectUserName();
-      loginPage.typeCorrectPassword();
+        loginPage.typeUserName(PageInputs.USER_NAME);
+      loginPage.typePassword(PageInputs.PASSWORD);
      SecureAreaPage secureAreaPage =  loginPage.submitLoginData();
 
      Assert.assertEquals(secureAreaPage.getMessageText(),"You logged into a secure area!\n×");
@@ -30,8 +31,8 @@ public class LoginTests extends TestBase {
     @Test
     public void loginIncorrectUserName(){
         LoginPage loginPage = mainStepsToLogin();
-        loginPage.typeIncorrectUserName();
-        loginPage.typeCorrectPassword();
+        loginPage.typeUserName(PageInputs.INCORRECT_USER_NAME);
+        loginPage.typePassword(PageInputs.PASSWORD);
         SecureAreaPage secureAreaPage = loginPage.submitLoginData();
 
         Assert.assertEquals(secureAreaPage.getMessageText(), "Your username is invalid!\n×");
@@ -40,8 +41,8 @@ public class LoginTests extends TestBase {
     @Test
     public void loginIncorrectPassword(){
         LoginPage loginPage = mainStepsToLogin();
-        loginPage.typeCorrectUserName();
-        loginPage.typeIncorrectPassword();
+        loginPage.typeUserName(PageInputs.USER_NAME);
+        loginPage.typePassword(PageInputs.INCORRECT_PASSWORD);
         SecureAreaPage secureAreaPage = loginPage.submitLoginData();
 
         Assert.assertEquals(secureAreaPage.getMessageText(), "Your password is invalid!\n×");

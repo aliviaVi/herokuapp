@@ -8,11 +8,7 @@ public class LoginPage {
     protected WebDriver webDriver;
 
     private By userNameById = By.id("username");
-    private String name = "tomsmith";
 
-    private String incorrectUserName = "tomsmith123";
-    private String password = "SuperSecretPassword!";
-    private String incorrectPass = "SuperSecretPassword!123";
     private By passwordById = By.id("password");
     private By loginButtonByXpath = By.xpath("//form[@id='login']/button/i");
     private By loginPageByXpath = By.xpath("//*[@id='content']/div/h2");
@@ -25,25 +21,16 @@ public class LoginPage {
         }
     }
 
-    public void typeCorrectUserName() {
+    public void typeUserName(String userName) {
         WebElement element = webDriver.findElement(userNameById);
-              element.sendKeys(name);
+              element.sendKeys(userName);
     }
 
-    public void typeCorrectPassword() {
+    public void typePassword(String password) {
         WebElement element = webDriver.findElement(passwordById);
         element.sendKeys(password);
     }
 
-    public void typeIncorrectPassword() {
-        WebElement element = webDriver.findElement(passwordById);
-        element.sendKeys(incorrectPass);
-    }
-
-    public void typeIncorrectUserName() {
-        WebElement element = webDriver.findElement(userNameById);
-        element.sendKeys(incorrectUserName);
-    }
 
 public  SecureAreaPage submitLoginData(){
         WebElement element = webDriver.findElement(loginButtonByXpath);

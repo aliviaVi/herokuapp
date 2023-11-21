@@ -5,6 +5,7 @@ import manager.LoginPage;
 import manager.SecureAreaPage;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+import utils.PageInputs;
 
 public class SecureAreaLogoutTest  extends TestBase{
 
@@ -17,8 +18,8 @@ public class SecureAreaLogoutTest  extends TestBase{
     public void logOut(){
         LoginPage loginPage = mainStepsToLogin();
 
-        loginPage.typeCorrectUserName();
-        loginPage.typeCorrectPassword();
+        loginPage.typeUserName(PageInputs.USER_NAME);
+        loginPage.typePassword(PageInputs.PASSWORD);
         SecureAreaPage secureAreaPage =  loginPage.submitLoginData();
         secureAreaPage.logout();
 

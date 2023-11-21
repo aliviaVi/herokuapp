@@ -27,12 +27,12 @@ public class HomePage {
         element.click();
         return new LoginPage (webDriver);
     }
-    public InputsPage openInputsPage(){
+   /* public InputsPage openInputsPage(){
         WebElement element = (new WebDriverWait(webDriver,10))
                 .until(ExpectedConditions.presenceOfElementLocated(inputsFieldByXpath));
         element.click();
         return new InputsPage(webDriver);
-    }
+    }*/
     public String getMessage(){
         String text = webDriver.findElement(By.xpath("//*[@id='content']/div/h2")).getText();
         return text;
