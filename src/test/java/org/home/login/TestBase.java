@@ -23,4 +23,8 @@ public class TestBase {
     public void tearDown(){
         webDriver.quit();
     }
+
+   // public void openPage( String url)
+
+
 }
