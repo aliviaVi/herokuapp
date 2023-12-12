@@ -11,6 +11,7 @@ public class HomePage {
 
     private By authByXpath = By.xpath("//a[contains(text(),'Form Authentication')]");
     private By inputsFieldByXpath = By.xpath("//a[contains(text(),'Inputs')]");
+    private By hoversFieldByXpath = By.xpath("//a[contains(text(), 'Hovers')]");
 
 
 
@@ -37,5 +38,12 @@ public class HomePage {
         String text = webDriver.findElement(By.xpath("//*[@id='content']/div/h2")).getText();
         return text;
 
+    }
+
+    public HoversPage openHoversPage(){
+        WebElement webElement = (new WebDriverWait(webDriver,10))
+                .until(ExpectedConditions.presenceOfElementLocated(hoversFieldByXpath));
+        webElement.click();
+        return new HoversPage(webDriver);
     }
 }
