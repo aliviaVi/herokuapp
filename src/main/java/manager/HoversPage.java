@@ -1,47 +1,35 @@
 package manager;
 
+import com.codeborne.selenide.ElementsCollection;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
-
+import utils.PageInputs;
 import java.util.List;
+
+import static com.codeborne.selenide.Selenide.*;
 
 public class HoversPage {
 
-    protected WebDriver webDriver;
 
     private By userAvatarXPath = By.xpath("//*[@id='content']/div/div[1]");
-   // private By avatarText = By.xpath("//*[@id='content']/div/div[1]/div");
     private By userAvatar = By.tagName("img");
     private By avatarText = By.tagName("h5");
     private By hoversTextOnThePage = By.xpath("//*[@id='content']/div/h3"); 
 
-
-    public HoversPage(WebDriver webDriver) {
-        this.webDriver = webDriver;
-        if (!webDriver.findElement(hoversTextOnThePage).getText().equals("Hovers")) {
-            throw new IllegalStateException("This is not a Hovers page," + "current page is>" + webDriver.getCurrentUrl());
-        }
+    public HoversPage openPage(){
+      return   page(open(PageInputs.PAGE_URL + "/hovers", HoversPage.class));
     }
-    
+
     public void hoverOfAvatarPicture(int i){
-        Actions actions = new Actions(webDriver);
-        List<WebElement> elements = webDriver.findElements(userAvatar);
-        actions.moveToElement(elements.get(i)).click().perform();
+        $$(userAvatar).get(i).hover();
 
     }
 
-    public void clickOfPicture(){
-        Actions actions = new Actions(webDriver);
-        WebElement element = webDriver.findElement(userAvatarXPath);
-        actions.moveToElement(element).click();
-      //  actions.perform();
-    }
     
     public boolean getTextAvatar(String username, int index){
-        List<WebElement> textElements = webDriver.findElements(avatarText);
-        String text = textElements.get(index).getText();
-        return text.contains(username);
+        String avatarTextByIndex = $$(avatarText).get(index).getText();
+        return avatarTextByIndex.contains(username);
+
     }
 }

@@ -22,8 +22,8 @@ public class HomePage {
         }
     }
 
-    public LoginPage openLoginPage(){
-        WebElement element = (new WebDriverWait(webDriver,10))
+  /*  public LoginPage openLoginPage(){
+        WebElement element = (new WebDriverWait(webDriver, 10))
                 .until(ExpectedConditions.presenceOfElementLocated(authByXpath));
         element.click();
         return new LoginPage (webDriver);
@@ -45,5 +45,5 @@ public class HomePage {
                 .until(ExpectedConditions.presenceOfElementLocated(hoversFieldByXpath));
         webElement.click();
         return new HoversPage(webDriver);
-    }
+    }*/
 }

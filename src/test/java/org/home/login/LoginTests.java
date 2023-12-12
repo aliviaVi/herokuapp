@@ -1,51 +1,44 @@
 package org.home.login;
 
-import manager.HomePage;
+
 import manager.LoginPage;
 import manager.SecureAreaPage;
-import org.testng.Assert;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import utils.PageInputs;
 
-public class LoginTests extends TestBase {
+import static com.codeborne.selenide.Condition.text;
 
 
-    public LoginPage mainStepsToLogin(){
-        HomePage homePage = new HomePage(webDriver);
-        LoginPage loginPage = homePage.openLoginPage();
-        return loginPage;
-    }
+public class LoginTests {
+      LoginPage loginPage = new LoginPage();
 
 
+      @BeforeMethod
+      public void open(){
+          loginPage.openPage();
+      }
     @Test
     public void loginSuccessTest(){
-        LoginPage loginPage = mainStepsToLogin();
         loginPage.typeUserName(PageInputs.USER_NAME);
-      loginPage.typePassword(PageInputs.PASSWORD);
-     SecureAreaPage secureAreaPage =  loginPage.submitLoginData();
-
-     Assert.assertEquals(secureAreaPage.getMessageText(),"You logged into a secure area!\n×");
-    }
-
-
-    @Test
-    public void loginIncorrectUserName(){
-        LoginPage loginPage = mainStepsToLogin();
-        loginPage.typeUserName(PageInputs.INCORRECT_USER_NAME);
         loginPage.typePassword(PageInputs.PASSWORD);
-        SecureAreaPage secureAreaPage = loginPage.submitLoginData();
+        SecureAreaPage secureAreaPage =  loginPage.submitLoginData();
+        secureAreaPage.getMessageText().shouldHave(text("You logged into a secure area!\n×"));
 
-        Assert.assertEquals(secureAreaPage.getMessageText(), "Your username is invalid!\n×");
     }
-
     @Test
-    public void loginIncorrectPassword(){
-        LoginPage loginPage = mainStepsToLogin();
+    public void LoginWithIncorrectUserName(){
+        loginPage.typeUserName(PageInputs.INCORRECT_USER_NAME);
+        loginPage.typePassword(PageInputs.INCORRECT_PASSWORD);
+        SecureAreaPage secureAreaPage = loginPage.submitLoginData();
+        secureAreaPage.getMessageText().shouldHave(text("Your username is invalid!\n×"));
+    }
+    @Test
+    public void loginWithIncorrectPassword(){
         loginPage.typeUserName(PageInputs.USER_NAME);
         loginPage.typePassword(PageInputs.INCORRECT_PASSWORD);
         SecureAreaPage secureAreaPage = loginPage.submitLoginData();
-
-        Assert.assertEquals(secureAreaPage.getMessageText(), "Your password is invalid!\n×");
+        secureAreaPage.getMessageText().shouldHave(text("Your password is invalid!\n×"));
     }
 
 }

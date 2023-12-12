@@ -1,11 +1,14 @@
 package manager;
 
+import com.codeborne.selenide.SelenideElement;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import utils.PageInputs;
+
+import static com.codeborne.selenide.Selenide.*;
 
 public class LoginPage {
-    protected WebDriver webDriver;
 
     private By userNameById = By.id("username");
 
@@ -14,28 +17,22 @@ public class LoginPage {
     private By loginPageByXpath = By.xpath("//*[@id='content']/div/h2");
 
 
-    public LoginPage(WebDriver webDriver) {
-        this.webDriver = webDriver;
-        if (!webDriver.findElement(loginPageByXpath).getText().equals("Login Page")) {
-            throw new IllegalStateException("This is not a Login page," + "current page is>" + webDriver.getCurrentUrl());
-        }
-    }
-
     public void typeUserName(String userName) {
-        WebElement element = webDriver.findElement(userNameById);
-              element.sendKeys(userName);
+         $(userNameById).setValue(userName);
     }
 
     public void typePassword(String password) {
-        WebElement element = webDriver.findElement(passwordById);
-        element.sendKeys(password);
+        $(passwordById).setValue(password);
     }
 
 
-public  SecureAreaPage submitLoginData(){
-        WebElement element = webDriver.findElement(loginButtonByXpath);
-        element.click();
-        return new SecureAreaPage(webDriver);
+    public  SecureAreaPage submitLoginData(){
+         $(loginButtonByXpath).click();
+        return page(SecureAreaPage.class);
 
 }
+    public LoginPage openPage(){
+        LoginPage loginPage = open(PageInputs.PAGE_URL + "/login", LoginPage.class);
+        return loginPage;
+    }
 }

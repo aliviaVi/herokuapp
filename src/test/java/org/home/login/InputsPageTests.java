@@ -1,36 +1,31 @@
 package org.home.login;
 
-import manager.HomePage;
 import manager.InputsPage;
 import org.openqa.selenium.By;
-import org.testng.Assert;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
+import utils.PageInputs;
+import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.open;
 
-public class InputsPageTests  extends TestBase{
+public class InputsPageTests{
+    InputsPage inputsPage = new InputsPage();
 
-
-    public InputsPage openInputsPage(){
-        HomePage homePage = new HomePage(webDriver);
-        InputsPage inputsPage = homePage.openInputsPage();
-        return inputsPage;
+    @BeforeMethod
+    public void openPage(){
+        inputsPage.openPage();
     }
 
     @Test
-    public void inputSuccess(){
-        InputsPage inputsPage = openInputsPage();
+    public void inputSuccess (){
         inputsPage.typeValue();
-
-        Assert.assertEquals(webDriver.findElement(By.xpath("//input[@type='number']")).getAttribute("value"), "1");
+        $(By.xpath("//input[@type='number']")).getAttribute("value").equals(1);
     }
-
     @Test
-    public void inputValuePlusDownValueSuccess(){
-        InputsPage inputsPage = openInputsPage();
+    public void inputThanDownValue(){
         inputsPage.typeValue();
         inputsPage.typeValue();
         inputsPage.downValue();
-
-        Assert.assertEquals(webDriver.findElement(By.xpath("//input[@type='number']")).getAttribute("value"), "1");
-
+        $(By.xpath("//input[@type='number']")).getAttribute("value").equals(1);
     }
 }

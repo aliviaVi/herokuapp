@@ -1,31 +1,32 @@
 package org.home.login;
 
-import manager.HomePage;
 import manager.HoversPage;
-import org.testng.Assert;
+
+import org.junit.Assert;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class HoversPageTests  extends TestBase{
+public class HoversPageTests {
+    HoversPage hoversPage = new HoversPage();
 
-    public HoversPage openHoversPage(){
-        HomePage homePage = new HomePage(webDriver);
-        HoversPage hoversPage = homePage.openHoversPage();
-        return hoversPage;
+    @BeforeMethod
+    public void openPage(){
+        hoversPage.openPage();
     }
 
     @Test
-    public void clickAvatarTest(){
-        HoversPage hoversPage = openHoversPage();
-        hoversPage.hoverOfAvatarPicture(2);
-        Assert.assertTrue(hoversPage.getTextAvatar("user2",1 ),"username user2 is not displayed");
+    public void checkAllPictures(){
+        for (int i = 1; i < 4  ; i++) {
+            hoversPage.hoverOfAvatarPicture(i);
+           Assert.assertTrue(hoversPage.getTextAvatar("user" + i, i -1));
+        }
     }
 
-   @Test
-    public void checkAllPictures(){
-        HoversPage hoversPage =openHoversPage();
-       for (int i = 1; i < 4; i++) {
-           hoversPage.hoverOfAvatarPicture(i);
-           Assert.assertTrue(hoversPage.getTextAvatar("user" + i, i -1), "username user" + i + "is not displayed");
-       }
-   }
+    @Test
+    public void clickAvatarByIndex(){
+        hoversPage.hoverOfAvatarPicture(2);
+        Assert.assertTrue(hoversPage.getTextAvatar("user2" , 1));
+    }
+
 }
