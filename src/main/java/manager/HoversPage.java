@@ -39,7 +39,9 @@ public class HoversPage {
       //  actions.perform();
     }
     
-    public String getTextAvatar(){
-       return webDriver.findElement(avatarText).getText();
+    public boolean getTextAvatar(String username, int index){
+        List<WebElement> textElements = webDriver.findElements(avatarText);
+        String text = textElements.get(index).getText();
+        return text.contains(username);
     }
 }

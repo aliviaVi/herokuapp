@@ -16,9 +16,8 @@ public class HoversPageTests  extends TestBase{
     @Test
     public void clickAvatarTest(){
         HoversPage hoversPage = openHoversPage();
-       // hoversPage.clickOfPicture();
-        hoversPage.hoverOfAvatarPicture(1);
-        Assert.assertEquals(hoversPage.getTextAvatar(),"name: user1");
+        hoversPage.hoverOfAvatarPicture(2);
+        Assert.assertTrue(hoversPage.getTextAvatar("user2",1 ),"username user2 is not displayed");
     }
 
    @Test
@@ -26,7 +25,7 @@ public class HoversPageTests  extends TestBase{
         HoversPage hoversPage =openHoversPage();
        for (int i = 1; i < 4; i++) {
            hoversPage.hoverOfAvatarPicture(i);
-           Assert.assertEquals(hoversPage.getTextAvatar(),"name: user"+ i);
+           Assert.assertTrue(hoversPage.getTextAvatar("user" + i, i -1), "username user" + i + "is not displayed");
        }
    }
 }
